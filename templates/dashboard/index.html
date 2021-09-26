@@ -1,0 +1,167 @@
+{% extends 'dashboard/layout.html' %}
+{% block title %}
+    User Dashboard
+{% endblock %}
+{% block content %}
+
+    <h3 class="mb-4 mt-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        Welcome
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% endif %}
+    </h3>
+    <br>
+<div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+      </svg>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Total Team Members
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          {{ total_members }} Members
+      </p>
+    </div>
+  </div>
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Blog Posts
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ total_blogs }} Blogs
+      </p>
+    </div>
+  </div>
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        contacts Messagges
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ total_contacts }} Messages
+      </p>
+    </div>
+  </div>
+</div>
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                    <tr
+                    class="text-xs font-semibold tracking-wide text-left
+                    text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50
+                    dark:text-gray-400 dark:bg-gray-800"
+                    >
+                    <th class="px-4 py-3">Cover</th>
+                    <th class="px-4 py-3">Title</th>
+                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Date</th>
+                    <th class="px-4 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                {% for blog_data in blogs %}
+                    <tr class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3 text-sm">
+                            <img style="width: 100px" src="{{ blog_data.thumbnail}}">
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{ blog_data.title }}
+                        </td>
+
+                        <td class="px-4 py-3 text-xs">
+                                {% if blog_data.status >= 1 %}
+                                    <span
+                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100
+                            rounded-full dark:bg-green-700 dark:text-green-100"
+                            >
+                            Published
+                                        </span>
+                                {% else %}
+                                     <span
+                            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100
+                            rounded-full dark:bg-red-700 dark:text-red-100"
+                            >
+                            Not published
+                                        </span>
+                                {% endif %}
+
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{ blog_data.created_on }}
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center space-x-4 text-sm">
+                            <a href="{% url 'update_blog' by=blog_data.id %}" class="stretched-link">
+                                <button
+                                    title="Edit Blog"
+                                    class="flex items-center justify-between px-2 py-2 text-sm f
+                                    ont-medium leading-5 text-purple-600 rounded-lg d
+                                    ark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                    aria-label="Edit"
+                                >
+                                    <svg
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    >
+                                    <path
+                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379
+                                        5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                                    ></path>
+                                    </svg>
+                                </button>
+                            </a>
+                             <a href="{% url 'blog_delete' by=blog_data.id %}" class="stretched-link">
+                                <button
+                                    title="Delete Blog"
+                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5
+                                    text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none
+                                    focus:shadow-outline-gray"
+                                    aria-label="Delete"
+                                >
+                                    <svg
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0
+                                        002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0
+                                        012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                    </svg>
+                                </button>
+                             </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

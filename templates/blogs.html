@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}
+    Blogs
+{% endblock %}
+{% block content %}
+{% load static %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col mt-4">
+          <form class="d-flex" action="{% url 'search' %}" method="POST">
+            <input class="form-control me-2" type="search" placeholder="Search" name="title" aria-label="Search">
+            <button class="btn btn-outline-dark" type="submit" value="search">Search</button>
+              {% csrf_token %}
+              {% if blog_list %}
+              {% endif %}
+          </form>
+        </div>
+      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 class="mb-3 mb-md-0">
+                    Shared movies
+                </h3><br>
+                <p>
+                    Here's a collection of movies that have been shared. This is one of the ways we discuss movies:
+                    by giving reviews of the films we've seen. This is significant to us and our community since
+                    sharing a film piques the attention of others.
+                </p>
+                </div>
+                <div class="col-4 pt-5">
+                        <a href="{% url 'dashboard' %}"><button class="btn btn-danger btn-lg" type="button" style="width: 200px">Post</button>
+                        </a>
+                </div>
+            </div>
+        </div>
+
+        <section class="text-dark pt-5">
+          <div class="container">
+              <div class="row mb-2">
+
+                {% for blog in blog_list %}
+                    <div class="col-md-6">
+                      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                          <strong class="d-inline-block mb-2 text-primary">{{ blog.author }}</strong>
+                            <strong class="d-inline-block mb-2 "> # {{ blog.tags }}</strong>
+                          <h3 class="mb-0">{{ blog.title }}</h3>
+                          <div class="mb-1 text-muted">{{ blog.created_on |date:"M d, Y"}}</div>
+                          <p class="card-text mb-auto">{{ blog.content|slice:":60"}}...</p>
+                          <a href="{% url 'blog_details' by=blog.id %}" class="stretched-link">Continue reading</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                             <img src="{{ blog.thumbnail}}" class="bd-placeholder-img" width="200" height="250" alt="blog image">
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+
+              </div>
+          </div>
+        </section>
+    </div>
+{% endblock %}

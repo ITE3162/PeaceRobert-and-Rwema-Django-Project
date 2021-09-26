@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@700&display=swap');
+:root{
+    --navLinkColor: #F6B127;
+    --heloTitleColor: #C68E20;
+    --heloPcolor:#61686A;
+    --btn1Color:#170D07;
+    --btn2color:#C8482E;
+    --btn2TextColor:#FFFFFF;
+
+}
+li a{
+    font-size: 28px;
+    color: var(--navLinkColor);
+    margin: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.text-warning{
+    font-size: 54px;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#helo-content{
+    margin-left: 700px;
+    height: 470px;
+}
+#pHello{
+    font-size: 30px;
+}
+
+#btn-d{
+
+    margin-left: 20px;
+    padding-top: 20px;
+}
+#btn1{
+    margin-left: 45px;
+    background: var(--btn1Color);
+    border: 0px;
+    color: var(--navLinkColor);
+}
+#btn2{
+    margin-left: 45px;
+    background: var(--btn2color);
+    border:0px;
+
+}
+
+#profile img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#teamSection{
+    background: #F1F1F1;
+}
+
+#contact{
+    background: #F1F1F1;
+}
+
+#about{
+    background: #F1F1F1;
+}
+
+#inyende{
+    background-image: url('cover.PNG');
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    background-repeat: no-repeat;
+    z-index: 2;
+    margin: 0;
+}
+
+#links{
+    display: block;
+}
+#links img{
+    width: 140px;
+    height: 170px;
+    padding: 15px;
+}
+
+@media screen and (max-width: 800px) {
+    #hello-text-section{
+        width: 100%;
+        text-align: center;
+        padding-top: 20px;
+    }
+    #btn-section{
+        display: block;
+    }
+    #inyende{
+        width: 100%;
+        height: auto;
+    }
+}

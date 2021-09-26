@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+    Blog Details
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<main class="container pt-5">
+
+  <div class="row g-5">
+    <div class="col-md-7">
+
+        <img src="../{{ blogs.thumbnail}}" class="bd-placeholder-img" width="100%" height="500" alt="">
+
+      <article class="blog-post">
+        <h2 class="blog-post-title">{{ blogs.title }}</h2>
+        <p class="blog-post-meta">{{ blogs.created_on }} - Posted By <b><a href="#">{{ blogs.author }}</a></b></p>
+        <hr>
+            <p>
+                {{ blogs.content }}
+            </p>
+          <hr>
+      </article>
+    </div>
+
+    <div class="col-md-5">
+      <div class="position-sticky" style="top: 2rem;">
+        <h4 class="fst">Related Post</h4>
+
+        <div class="row ">
+            {% for rel_blog in related_blogs %}
+                <div class="col-md-12">
+                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-6 p-4 d-flex flex-column position-static">
+                      <h4 class="mb-0">{{ rel_blog.title }}</h4>
+                        <strong class="d-inline-block mb-2 text-primary"> # {{ rel_blog.tags }}</strong>
+                      <div class="mb-1 text-muted">{{ rel_blog.created_on |date:"M d, Y"}}</div>
+                      <p class="card-text mb-auto">
+                          {{ rel_blog.content|slice:":60"}}...
+                      </p>
+                      <a href="{% url 'blog_details' by=rel_blog.id %}" class="stretched-link">Continue reading</a>
+                    </div>
+                    <div class="col-6 d-none d-lg-block">
+                        <img src="../{{ rel_blog.thumbnail}}" class="bd-placeholder-img" width="220" height="250">
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

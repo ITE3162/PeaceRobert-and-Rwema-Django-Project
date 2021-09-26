@@ -1,0 +1,188 @@
+<!-- @format -->
+
+{% extends 'base.html' %} 
+{% block title %} Home {% endblock %} 
+{% block content%}
+{% load static %}
+
+<section class="bg-dark text-light" id="inyende">
+        <div class="container-fluid">
+            <div class="row pt-5">
+                <div class="col-6">
+
+                </div>
+                <div class="col-6" id="hello-text-section">
+                    <h1>
+                        <span class="text-warning">
+                        Cinemania website for those who Love movies
+                        </span>
+                    </h1>
+                  <p class="lead my-4 p-1" style="font-size: 28px; width: 96%; text-align: center">
+                     Welcome our website of cinemania Movie lovers developed by Rwema and Peace
+                      the programmers based in UR CST Nyarugenge campus alongside with their instructor pelino
+                  </p>
+                </div>
+            </div>
+            <div class="row" id="btn-section">
+                <div class="col-6">
+
+                </div>
+                <div class="col-3 p-5">
+                    <a href="#what-we-do">
+                        <button class="btn btn-primary" style="width: 200px; height: 60px; font-size: 25px; background: #170D07; border: 0px; color:#F6B127">More About us</button>
+                    </a>
+                </div>
+                <div class="col-3 p-5">
+                    <a href="{% url 'login' %}">
+                        <button class="btn btn-primary" style="width: 250px;height: 60px; font-size: 25px; background: #C8482E; border: 0px; color:#F1F1F1">Join the community</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+        <section class="p-5" id="about">
+      <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 style="text-align: center;">ABOUT US</h1>
+              <center>
+                  <hr style="width: 150px; background: #E44B2F; height: 10px;">
+              </center>
+            </div>
+          </div>
+          <div class="row text-center">
+              {% for about in about %}
+                  <div class="col-md">
+                    <div class="card text-dark" id="about" style="border: 0px;">
+
+                          <div class="card-body text-center">
+                              <p class="card-text" style="text-align: left">
+                                  {{ about.content }}
+                              </p>
+                              <a href="#" class="btn btn-danger" style="width: 200px;height: 50px">Read More</a>
+                          </div>
+
+                      </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="card text-dark" id="about" style="border: 0px;">
+                          <div class="card-body text-center">
+                            <img src="{{ about.profile}}" style="height: 350px" class="img-thumbnail" alt="">
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+    </section>
+    <!-- WHAT WE DO -->
+    <section class="bg-dark" id="what-we-do">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="text-center text-light pt-5">WHAT WE REALY DO</h1>
+              <center>
+                  <hr style="width: 150px; background: #E44B2F; height: 10px;">
+              </center>
+            </div>
+          </div>
+            <div class="row text-center pb-5">
+                {% for what in what %}
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                              <i class="bi bi-film">
+                                  <img src="{{ what.cover}}" width="50" alt="">
+                              </i>
+                            </div>
+                            <h3 class="card-title">
+                              {{ what.title }}
+                            </h3>
+                            <p class="card-text pb-5">
+                                {{ what.content |slice:":250"}}
+                            </p>
+                            <a href="#" class="btn btn-danger" style="width: 200px;height: 50px">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Teams -->
+    <section class="p-5" id="teamSection" >
+      <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 style="text-align: center;">OUR TEAM</h1>
+              <center>
+                  <hr style="width: 150px; background: #117864; height: 10px;">
+              </center>
+            </div>
+          </div>
+          <div class="row">
+              {% for team in team %}
+                  <div class="col-6">
+                      <div class="row">
+                          <div class="col-3">
+                          <div id="profile">
+                              <img src="{{ team.profile}}" alt="">
+                          </div>
+                      </div>
+                      <div class="col-9">
+                          <p style="margin: 0"><strong>{{ team.name }}</strong></p>
+                          <p style="margin: 0"><strong>{{ team.title }}</strong></p>
+                          <p style="padding-right: 80px;">
+                              {{ team.description |slice:":80" }}...
+                          </p>
+                      </div>
+                      </div>
+                  </div>
+              {% endfor %}
+
+          </div>
+      </div>
+    </section>
+    <!-- Blog Post -->
+      <section class="bg-dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="text-center text-light pt-5">BLOG POSTS</h1>
+              <center>
+                  <hr style="width: 150px; background: #E44B2F; height: 10px;">
+              </center>
+            </div>
+          </div>
+
+            <div class="row text-center">
+                {% for blog in blogs %}
+                  <div class="col-md">
+                      <div class="card bg-dark text-light">
+                          <div class="card-body text-center">
+                              <a href="{% url 'blogs' %}">
+                                  <img style="width: 191px;height: 200px;" src="{{ blog.thumbnail}}">
+                              </a>
+                              <p class="card-title pt-2">
+                                   {{ blog.created_on |date:"M d, Y" }}
+                              </p>
+                              <h5 class="card-title ">
+                                  {{ blog.author }}
+                              </h5>
+                              <h3 class="card-title pb-5">
+                                  {{ blog.title }}
+                              </h3>
+                          </div>
+                      </div>
+                  </div>
+                {% endfor %}
+
+              </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
