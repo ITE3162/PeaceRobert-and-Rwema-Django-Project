@@ -18,5 +18,4 @@ The project files include a mockup of the desired website design. (fonts and fon
 6. For any other required pages whose designs are not included in the provided mockup, feel free to design them however you like.
 7. The preferred database for this project will be PostgreSQL
 8. At the completion, your group's version of the project's code should be pushed to github.
-9. The website should be published/deployed using the platform of your choice([Python anywhere](https://www.pythonanywhere.com/), [Heroku](https://devcenter.heroku.com/articles/deploying-python), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-django-to-app-platform) or any other platform.
-
+9. The website was published/deployed on [Heroku](https://devcenter.heroku.com/articles/deploying-python)
